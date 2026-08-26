@@ -53,4 +53,4 @@ Spark/Databricks is the escape hatch (a later post). Tease post 2: turning Parqu
 lakehouse with DuckLake. -->
 
 ---
-*Reproduce everything: [smb-duckdb-lakehouse-lab](https://github.com/HielBDTMQ/smb-duckdb-lakehouse-lab) → `ingestion/` and `queries/`.*
+*Reproduce everything: [datomiq-duckdb-lakehouse-lab](https://github.com/HielBDTMQ/datomiq-duckdb-lakehouse-lab) → `ingestion/` and `queries/`.*

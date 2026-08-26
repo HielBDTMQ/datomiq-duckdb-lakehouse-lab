@@ -1,4 +1,4 @@
-# smb-duckdb-lakehouse-lab
+# datomiq-duckdb-lakehouse-lab
 
 Build-in-public lab: a cheap, cloud-agnostic lakehouse for SMB with **DuckDB as the core engine**
 (DuckLake + dlt + dbt-duckdb + Polars). Companion code for the DatomIQ blog series; each post =
