@@ -1,37 +1,36 @@
 # smb-duckdb-lakehouse-lab
 
-A **build-in-public** lab: a cheap, cloud-agnostic lakehouse for small/medium businesses with
-**DuckDB as the core engine** — DuckLake + dlt + dbt-duckdb + Polars, portable across object
-storage and Azure. Companion code for the DatomIQ blog series; each post = one buildable milestone.
+Build-in-public lab: a cheap, cloud-agnostic lakehouse for SMB with **DuckDB as the core engine**
+(DuckLake + dlt + dbt-duckdb + Polars). Companion code for the DatomIQ blog series; each post =
+one buildable milestone. Databricks stays the escape hatch — this is about the many cases where a
+whole lakehouse fits on one node.
 
-> Why DuckDB, not "why not Databricks": Databricks stays the escape hatch for genuinely
-> big/distributed jobs. This series is about the many SMB cases where a whole lakehouse fits on
-> one node — so compute is ephemeral and near-free, and you only pay for storage + a small catalog.
+> The code is yours to write. These folders hold **notes and prompts, not solutions.**
 
-## Setup
+## Setup (uv)
 
-```bash
-uv sync                       # install duckdb, polars, pyarrow
-bash scripts/download_data.sh # fetch the NL railway datasets into data/
-```
-
-(No `uv`? `pip install duckdb polars pyarrow` works too.)
-
-## Posts
-
-| # | Post | Code |
-|---|---|---|
-| 1 | DuckDB from zero — and why it exists | `queries/01_duckdb_from_zero.sql`, `src/duckdb_from_zero.py`, `posts/01-duckdb-from-zero.md` |
-
-### Post 1 — run it
+DatomIQ uses **uv** everywhere. Start by creating the virtualenv:
 
 ```bash
-# SQL, in the DuckDB CLI:
-duckdb < queries/01_duckdb_from_zero.sql
-
-# or the Python version (adds the DuckDB⇄Polars zero-copy handoff):
-uv run src/duckdb_from_zero.py
+uv venv                       # create .venv/
+source .venv/bin/activate     # or prefix each command with `uv run`
+uv add duckdb dlt polars pyarrow
 ```
 
-Dataset: 2023 Dutch railway services — **21.2M rows in a 330 MB gzipped CSV** — from the DuckDB
-blog [_Analyzing Railway Traffic in the Netherlands_](https://duckdb.org/2024/05/31/analyzing-railway-traffic-in-the-netherlands).
+(The first `uv add` also creates `pyproject.toml`; run `uv init` first if you want it explicit.)
+
+## Layout
+
+- **`ingestion/`** — get the data in with **dlt** (see `ingestion/NOTES.md`). dlt's default
+  destination is DuckDB, so this doubles as your first ingestion experiment.
+- **`queries/`** — DuckDB exploration for post 1 (see `queries/NOTES.md`).
+- **`data/`** — downloaded/produced data (git-ignored).
+- **`posts/`** — the blog drafts (start with `posts/01-duckdb-from-zero.md`).
+
+## Post 1 — DuckDB from zero
+
+Dataset: 2023 Dutch railway services (**21.2M rows, 330 MB gzipped CSV**) from the DuckDB blog
+[_Analyzing Railway Traffic in the Netherlands_](https://duckdb.org/2024/05/31/analyzing-railway-traffic-in-the-netherlands).
+
+Flow: **get it in via dlt** (`ingestion/`) → **explore in DuckDB** (`queries/`) → **write it up**
+(`posts/`).
