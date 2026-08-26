@@ -1,0 +1,12 @@
+# data is downloaded, not committed
+data/*.csv
+data/*.csv.gz
+data/*.parquet
+*.duckdb
+*.duckdb.wal
+# python
+.venv/
+__pycache__/
+*.pyc
+# os
+.DS_Store
